@@ -3,14 +3,20 @@ import React, { use, useState } from "react";
 import IMAGEZOOM from "./IMAGEZOOM";
 const ProductPage = () => {
   const [show, setShow] = useState(false);
-  const [mainImg, setmainImg] = useState("")
+  const [Rating, setRating] = useState("3.8")
+  const [Onsale, setOnsale] = useState(true)
+
+  const [mainImg, setmainImg] = useState("/pp3.jpg")
   const handelImgChange = (i)=>{
-    setmainImg(i)
+    setmainImg(i.image)
+    setRating(i.rating)
+    setOnsale(i.onSale)
+    
   }
  const products = [
   {
     id: 1,
-    image: "/p11.png",
+    image: "/pp-226.avif",
     onSale: true,
     rating: 4.5,
   },
@@ -22,31 +28,31 @@ const ProductPage = () => {
   },
   {
     id: 3,
-    image: "/pp4.jpeg",
+    image: "/pp-21.avif",
     onSale: true,
     rating: 5.0,
   },
   {
     id: 4,
-    image: "/pp5.jpeg",
+    image: "/pp-22.avif",
     onSale: false,
     rating: 4.2,
   },
   {
     id: 5,
-    image: "/p11.png",
+    image: "/pp-23.avif",
     onSale: true,
     rating: 4.0,
   },
   {
     id: 6,
-    image: "/pp6.jpg",
+    image: "/pp-21.avif",
     onSale: true,
     rating: 3.9,
   },
   {
     id: 7,
-    image: "/pp2.jpeg",
+    image:"/pp-25.avif",
     onSale: false,
     rating: 4.7,
   }
@@ -139,7 +145,7 @@ const ProductPage = () => {
                     </div> */}
                     {products.map((product)=>{
                        return ( <div onClick={()=>{
-                            handelImgChange(product.image)
+                            handelImgChange(product)
                        }} key={product.id} className=" h-[60px] w-[70px]">
                             <img className="h-full w-full object-cover" src ={product.image} alt="" />
                         </div>)
@@ -147,9 +153,22 @@ const ProductPage = () => {
                   </div>
                 </div>
 
-                <div className="col-span-10 h-[400px]  overflow-hidden ">
+                <div className="col-span-10 h-[500px]  overflow-hidden relative ">
                     <IMAGEZOOM url = {mainImg} />
+                      <div  className={`${ Onsale ? "block": "hidden" } sale absolute top-5 -left-5 bg-red-800 px-15 -rotate-[30deg]`}>
+  <div className=" text-white font-bold">
+    <span>onSale</span>
+  </div>
 </div>
+<div
+  className={`rating absolute top-2 right-2 ${
+    Rating > 4 ? 'bg-green-800' : 'bg-yellow-400'
+  } text-white font-bold rounded`}
+>
+  <div><span className="px-5">{Rating}</span></div>
+</div>
+
+                </div>
                 {/* <div className="col-span-10 h-[500px] overflow-hidden group shadow">
 
     <ReactImageMagnify {...{
@@ -487,6 +506,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+      {/* bottom-section */}
       <div className="container-fluid bg-[#F1F2F6] py-5 ">
         <div className="container m-auto flex flex-col gap-3 pb-8 ">
           <div>
@@ -494,7 +514,7 @@ const ProductPage = () => {
           </div>
           <div className="card h-[300px] w-[220px] flex flex-col justify-between gap-2 bg-white  ">
             <div className="h-[60%] px-2 py-1">
-              <img className="h-full w-full object-cover" src="p2.png" alt="" />
+              <img className="h-full w-full object-cover" src={mainImg} alt="mainImg" />
             </div>
             <div className="flex flex-col px-2">
               <span className="text-blue-500">Stilleto high heel shoes</span>

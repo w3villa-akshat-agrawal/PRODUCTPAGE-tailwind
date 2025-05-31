@@ -9,8 +9,8 @@ const IMAGEZOOM = ({ url }) => {
   const handleMouseHover = (e) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
 
-    const x = ((e.pageX - left - window.scrollX) / width) * 100;
-    const y = ((e.pageY - top - window.scrollY) / height) * 100;
+    const x = ((e.pageX - left) / width) * 100;
+    const y = ((e.pageY - top) / height) * 100;
 
     setPosition({ x, y });
     setCursorPosition({ x: e.pageX - left, y: e.pageY - top });
