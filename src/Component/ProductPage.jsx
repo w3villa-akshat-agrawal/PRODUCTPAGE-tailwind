@@ -75,7 +75,7 @@ const ProductPage = () => {
 
   return (
     <>
-      <div className="container-fluid m-auto bg-[#F8F8F8] py-5  ">
+      <div className="container-fluid m-auto bg-[#F8F8F8] py-5 sm:px-0 px-2  ">
         {/* top-section<i class="ri-facebook-line"></i> */}
         <div className="container-fluid border-b-2 border-gray-300">
           <div className="container m-auto">
@@ -87,62 +87,14 @@ const ProductPage = () => {
         </div>
 
         {/* product-section */}
-        <div className="container m-auto py-8 ">
-          <div className="grid grid-cols-2 gap-5 mb-10">
+        <div className="container m-auto py-8  ">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 sm:mb-10">
             {/* left-section */}
             <div className="flex flex-col justify-between">
               <div className="grid grid-cols-12 gap-1 ">
-                <div className="col-span-2 ">
-                  <div className="flex flex-col items-center gap-y-2  ">
-                    {/* <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div>
-                    <div className=" h-[60px] w-[70px]">
-                      <img
-                        className="w-full h-full object-cover"
-                        src="p1.png"
-                        alt=""
-                      />
-                    </div> */}
+                <div className="sm:col-span-2 col-span-12 ">
+                  <div className="flex sm:gap-x-0 gap-x-2 flex-wrap justify-center sm:flex-col items-center gap-y-2  ">
+                    
                     {products.map((product)=>{
                        return ( <div onClick={()=>{
                             handelImgChange(product)
@@ -153,7 +105,7 @@ const ProductPage = () => {
                   </div>
                 </div>
 
-                <div className="col-span-10 h-[500px]  overflow-hidden relative ">
+                <div className="sm:col-span-10 col-span-12 h-[500px]  overflow-hidden relative ">
                     <IMAGEZOOM url = {mainImg} />
                       <div  className={`${ Onsale ? "block": "hidden" } sale absolute top-5 -left-5 bg-red-800 px-15 -rotate-[30deg]`}>
   <div className=" text-white font-bold">
@@ -169,84 +121,12 @@ const ProductPage = () => {
 </div>
 
                 </div>
-                {/* <div className="col-span-10 h-[500px] overflow-hidden group shadow">
-
-    <ReactImageMagnify {...{
-    smallImage: {
-        alt: 'Wristwatch by Ted Baker London',
-        isFluidWidth: true,
-        src:" /p11.png"
-    },
-    largeImage: {
-        src: "/p1.png",
-        width: 800,
-        height: 800
-    }
-}} />
-   <div className="w-[80%]">
-             <ReactImageMagnify {...{
-    smallImage: {
-        alt: 'Wristwatch by Ted Baker London',
-        isFluidWidth: true,
-        src: " /p11.png"
-    },
-    largeImage: {
-        src: "/p11.png",
-        width: 836,
-        height: 500
-    },
-    enlargedImagePosition: 'over',
-    lensStyle:{ backgroundColor :'rgba(0,0,0,.6'}
-}} />
-   </div>
-  
-</div> */}
- {/* <div className="col-span-10 w-full h-[500px]  relative">
-  <div className="w-100% h-[450px] border">
-    <ReactImageMagnify 
-        
-      {...{
-        smallImage: {
-          alt: "Red high heel shoe",
-          isFluidWidth: true,
-          src: mainImg,
-          width:"100px",
-          height:"100px"
-        },
-        largeImage: {
-          src: mainImg,
-          width: 1600,
-          height: 1600,
-        },
-        enlargedImageContainerDimensions: {
-          width: "200%",
-          height: "100%", // Full height of the container div (500px)
-        },
-        enlargedImagePosition: "beside",
-        enlargedImageContainerStyle: {
-          backgroundColor: "white",
-          boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-          borderRadius: "8px",
-          zIndex: 100,
-          height: "500px", // Fix the height to match container
-          overflow: "hidden", // Prevent overflow
-        },
-        imageStyle: {
-          height: "100%", // Stretch image to container height
-          width: "auto",   // Maintain aspect ratio
-          objectFit: "contain",
-        },
-        isHintEnabled: true,
-      }}
-    />
-  </div>
-</div> */}
-
+                
 
 
 
               </div>
-              <div className="mt-50">
+              <div className=" sm:mt-50 mt-5 sm:mb-0 mb-3">
                 <ul className="flex items-center gap-1  ">
                   <li>tags:</li>
                   <li className="bg-gray-800 text-white rounded-2xl  text text-xs flex items-center justify-center px-3 py-1">
@@ -267,8 +147,8 @@ const ProductPage = () => {
 
             {/* right-section */}
             <div>
-              <div className="menu w-[60%] ">
-                <ul className="flex justify-between text-xs">
+              <div className="menu sm:w-[60%] w-full ">
+                <ul className="flex flex-wrap items-center justify-center gap-2 sm:justify-between text-xs">
                   <li className="text-gray-400 hover:font-bold hover:text-black hover:border-b hover:border-red-600 cursor-pointer">
                     DESCRIPTION
                   </li>
@@ -349,12 +229,12 @@ const ProductPage = () => {
                 </span>
               </div>
               {/* price section  */}
-              <div className="w-full flex border-y-2 border-[#E2E2E2]">
-                <div className="w-[15%] border-r border-[#E2E2E2]  flex flex-col pt-3 my-1 ">
+              <div className="w-full flex sm:flex-row  border-y-2 border-[#E2E2E2]">
+                <div className="sm:w-[15%] w-[40%] justify-center sm:justify-start border-r border-[#E2E2E2]  flex flex-col pt-3 my-1 ">
                   <span className="text-2xl font-bold pr-3">$425.00</span>
                   <span className="text-xs text-gray-400">EX TAX $425.00</span>
                 </div>
-                <div className=" w-[85%] border-[#E2E2E2] flex justify-between">
+                <div className=" sm:w-[85%] w-[60%] border-[#E2E2E2] flex sm:flex-row flex-col sm:items-start items-center sm:justify-between">
                   <div className="ps-3 pt-3 text-sm">
                     <div className="text-rose-600">
                       <i class="ri-close-circle-line"></i> 2-3 day return
@@ -434,8 +314,8 @@ const ProductPage = () => {
               </div>
               {/* Add to cart */}
               <div className=" py-3 mt-3 border-y-2 border-[#E2E2E2]">
-                <div className="grid grid-cols-12 gap-x-1">
-                  <div className="col-span-1 flex justify-center">
+                <div className="grid grid-cols-12 gap-x-1 gap-y-2">
+                  <div className="sm:col-span-1 col-span-2 flex justify-center">
                     <input
                       className="w-full border  py-1 rounded ps-1 "
                       type="number"
@@ -445,19 +325,19 @@ const ProductPage = () => {
                       value="1"
                     />
                   </div>
-                  <div className="col-span-7 ">
+                  <div className="sm:col-span-7 col-span-10 ">
                     <button className="w-full py-2 rounded bg-blue-800  text-white">
                       {" "}
                       <i class="ri-shopping-cart-line"></i> Add to cart{" "}
                     </button>
                   </div>
-                  <div className="col-span-3 ">
+                  <div className="sm:col-span-3 col-span-6">
                     <button className="w-full py-2  rounded bg-green-800  text-white">
                       {" "}
                       <i class="ri-money-dollar-circle-line"></i> buy now{" "}
                     </button>
                   </div>
-                  <div className="col-span-1  ">
+                  <div className="sm:col-span-1 col-span-6 ">
                     <span className="bg-red-700 py-2 rounded  text-white w-[100%] flex items-center justify-center">
                       ?
                     </span>
@@ -507,7 +387,7 @@ const ProductPage = () => {
         </div>
       </div>
       {/* bottom-section */}
-      <div className="container-fluid bg-[#F1F2F6] py-5 ">
+      <div className="container-fluid bg-[#F1F2F6] py-5 px-2 ">
         <div className="container m-auto flex flex-col gap-3 pb-8 ">
           <div>
             <span className="border-b border-red-600">Realted products</span>
