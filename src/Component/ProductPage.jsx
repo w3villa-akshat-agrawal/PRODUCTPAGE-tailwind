@@ -1,8 +1,5 @@
 import React, { use, useState } from "react";
-import "react-medium-image-zoom/dist/styles.css";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
-import ReactImageMagnify from "react-image-magnify";
+
 import IMAGEZOOM from "./IMAGEZOOM";
 const ProductPage = () => {
   const [show, setShow] = useState(false);
