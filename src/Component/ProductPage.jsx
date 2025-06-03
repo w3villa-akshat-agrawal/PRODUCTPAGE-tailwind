@@ -1,67 +1,106 @@
 import React, { use, useState } from "react";
 
 import IMAGEZOOM from "./IMAGEZOOM";
+import { useDispatch, useSelector } from "react-redux";
+import { AddtoCart } from "../features/Cart/CartSlice";
 const ProductPage = () => {
   const [show, setShow] = useState(false);
   const [Rating, setRating] = useState("3.8")
   const [Onsale, setOnsale] = useState(true)
-
+  const [price, setprice] = useState("")
+  const [size, setsize] = useState("")
+  const [pID, setpID] = useState("")
+  const [productCount, setproductCount] = useState(0)
+  const [cartItem, setcartItem] = useState({})
+  const cart = useSelector((state)=> state.cart.value)
+  const dispatch = useDispatch()
   const [mainImg, setmainImg] = useState("/pp3.jpg")
-  const handelImgChange = (i)=>{
+  const handelImgChange = (i) => {
     setmainImg(i.image)
     setRating(i.rating)
     setOnsale(i.onSale)
-    
+    setprice(i.payment)
+    setpID(i.id)
+
   }
- const products = [
+const products = [
   {
-    id: 1,
+    id: "prod_001",
     image: "/pp-226.avif",
     onSale: true,
     rating: 4.5,
+    payment: 1200,
   },
   {
-    id: 2,
+    id: "prod_002",
     image: "/pp3.jpg",
     onSale: false,
     rating: 3.8,
+    payment: 850,
   },
   {
-    id: 3,
+    id: "prod_003",
     image: "/pp-21.avif",
     onSale: true,
     rating: 5.0,
+    payment: 1500,
   },
   {
-    id: 4,
+    id: "prod_004",
     image: "/pp-22.avif",
     onSale: false,
     rating: 4.2,
+    payment: 950,
   },
   {
-    id: 5,
+    id: "prod_005",
     image: "/pp-23.avif",
     onSale: true,
     rating: 4.0,
+    payment: 1100,
   },
   {
-    id: 6,
+    id: "prod_006",
     image: "/pp-21.avif",
     onSale: true,
     rating: 3.9,
+    payment: 990,
   },
   {
-    id: 7,
-    image:"/pp-25.avif",
+    id: "prod_007",
+    image: "/pp-25.avif",
     onSale: false,
     rating: 4.7,
+    payment: 1400,
   }
 ];
 
+const sizes = ["XL", "L", "M", "S", "XS"];
+
+const handelSize = (selectedSize) => {
+  setsize(selectedSize);
+};
 
   const handleClick = () => {
     setShow(true);
   };
+  // Add to cart function
+ const handelAddToCart = () => {
+  const item = {
+    price,
+    size,
+    productCount,
+    mainImg,
+    pID
+    
+  };
+
+  dispatch(AddtoCart(item));
+  setsize("");
+  setpID("")
+  setproductCount(0);
+  console.log(cart)
+};
   const handelClose = () => {
     <link
       rel="stylesheet"
@@ -94,34 +133,33 @@ const ProductPage = () => {
               <div className="grid grid-cols-12 gap-1 ">
                 <div className="sm:col-span-2 col-span-12 ">
                   <div className="flex sm:gap-x-0 gap-x-2 flex-wrap justify-center sm:flex-col items-center gap-y-2  ">
-                    
-                    {products.map((product)=>{
-                       return ( <div onClick={()=>{
-                            handelImgChange(product)
-                       }} key={product.id} className=" h-[60px] w-[70px]">
-                            <img className="h-full w-full object-cover" src ={product.image} alt="" />
-                        </div>)
+
+                    {products.map((product) => {
+                      return (<div onClick={() => {
+                        handelImgChange(product)
+                      }} key={product.id} className=" h-[60px] w-[70px]">
+                        <img className="h-full w-full object-cover" src={product.image} alt="" />
+                      </div>)
                     })}
                   </div>
                 </div>
 
                 <div className="sm:col-span-10 col-span-12 h-[500px]  overflow-hidden relative ">
-                    <IMAGEZOOM url = {mainImg} />
-                      <div  className={`${ Onsale ? "block": "hidden" } sale absolute top-5 -left-5 bg-red-800 px-15 -rotate-[30deg]`}>
-  <div className=" text-white font-bold">
-    <span>onSale</span>
-  </div>
-</div>
-<div
-  className={`rating absolute top-2 right-2 ${
-    Rating > 4 ? 'bg-green-800' : 'bg-yellow-400'
-  } text-white font-bold rounded`}
->
-  <div><span className="px-5">{Rating}</span></div>
-</div>
+                  <IMAGEZOOM url={mainImg} />
+                  <div className={`${Onsale ? "block" : "hidden"} sale absolute top-5 -left-5 bg-red-800 px-15 -rotate-[30deg]`}>
+                    <div className=" text-white font-bold">
+                      <span>onSale</span>
+                    </div>
+                  </div>
+                  <div
+                    className={`rating absolute top-2 right-2 ${Rating > 4 ? 'bg-green-800' : 'bg-yellow-400'
+                      } text-white font-bold rounded`}
+                  >
+                    <div><span className="px-5">{Rating}</span></div>
+                  </div>
 
                 </div>
-                
+
 
 
 
@@ -167,9 +205,8 @@ const ProductPage = () => {
               {/* description */}
               <div className="description relative">
                 <div
-                  className={`overflow-hidden mt-3  ${
-                    show ? "h-full" : "h-16"
-                  }`}
+                  className={`overflow-hidden mt-3  ${show ? "h-full" : "h-16"
+                    }`}
                 >
                   <p className="text-[13px]">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
@@ -189,25 +226,22 @@ const ProductPage = () => {
                 </div>
 
                 <div
-                  className={`absolute bottom-0 left-0 h-4 w-full bg-white opacity-75 z-10 ${
-                    show ? "hidden" : "block"
-                  }`}
+                  className={`absolute bottom-0 left-0 h-4 w-full bg-white opacity-75 z-10 ${show ? "hidden" : "block"
+                    }`}
                 ></div>
 
                 <button
                   onClick={handleClick}
-                  className={`absolute z-20 -bottom-3 left-1/2 transform -translate-x-1/2 bg-blue-800 text-xs text-white px-4 py-1 rounded ${
-                    show ? "hidden" : "block"
-                  }`}
+                  className={`absolute z-20 -bottom-3 left-1/2 transform -translate-x-1/2 bg-blue-800 text-xs text-white px-4 py-1 rounded ${show ? "hidden" : "block"
+                    }`}
                 >
                   Show More
                 </button>
 
                 <button
                   onClick={handelClose}
-                  className={`absolute z-20 -bottom-7 left-1/2 transform -translate-x-1/2 bg-blue-800 text-xs text-white px-4 py-1 rounded ${
-                    show ? "block" : "hidden"
-                  }`}
+                  className={`absolute z-20 -bottom-7 left-1/2 transform -translate-x-1/2 bg-blue-800 text-xs text-white px-4 py-1 rounded ${show ? "block" : "hidden"
+                    }`}
                 >
                   Show Less
                 </button>
@@ -228,10 +262,10 @@ const ProductPage = () => {
                   - Write a review{" "}
                 </span>
               </div>
-              {/* price section  */}
+              {/* price section <li>home</li> */}
               <div className="w-full flex sm:flex-row  border-y-2 border-[#E2E2E2]">
                 <div className="sm:w-[15%] w-[40%] justify-center sm:justify-start border-r border-[#E2E2E2]  flex flex-col pt-3 my-1 ">
-                  <span className="text-2xl font-bold pr-3">$425.00</span>
+                  <span className="text-2xl font-bold pr-3">${price}</span>
                   <span className="text-xs text-gray-400">EX TAX $425.00</span>
                 </div>
                 <div className=" sm:w-[85%] w-[60%] border-[#E2E2E2] flex sm:flex-row flex-col sm:items-start items-center sm:justify-between">
@@ -282,22 +316,19 @@ const ProductPage = () => {
                     {" "}
                     <span>Multiple Choices</span>
                     <ul className="flex items-center gap-5 mt-2">
-                      <li className="p-2 py-1 bg-gray-100 border shadow-2xl">
-                        Xl
-                      </li>
-                      <li className="p-2 py-1 bg-gray-100 border shadow-2xl">
-                        L
-                      </li>
-                      <li className="p-2 py-1 bg-gray-100 border shadow-2xl">
-                        M
-                      </li>
-                      <li className="p-2 py-1 bg-gray-100 border shadow-2xl">
-                        S
-                      </li>
-                      <li className="p-2 py-1 bg-gray-100 border shadow-2xl">
-                        XS
-                      </li>
-                    </ul>
+  {sizes.map((s, idx) => (
+    <li
+      key={idx}
+      onClick={() => handelSize(s)}
+      className={`p-2 py-1 cursor-pointer border shadow-2xl ${
+        size === s ? "bg-black text-white" : "bg-gray-100"
+      }`}
+    >
+      {s}
+    </li>
+  ))}
+</ul>
+
                   </div>
                   <div>
                     <span>
@@ -317,16 +348,20 @@ const ProductPage = () => {
                 <div className="grid grid-cols-12 gap-x-1 gap-y-2">
                   <div className="sm:col-span-1 col-span-2 flex justify-center">
                     <input
+                      onChange={(e)=>{
+                          setproductCount(e.target.value)
+                      }}  
                       className="w-full border  py-1 rounded ps-1 "
                       type="number"
                       min="1"
                       max="10"
                       step="1"
-                      value="1"
+                      placeholder="1"
+                      value={productCount}
                     />
                   </div>
                   <div className="sm:col-span-7 col-span-10 ">
-                    <button className="w-full py-2 rounded bg-blue-800  text-white">
+                    <button onClick={handelAddToCart} className="w-full py-2 rounded bg-blue-800  text-white">
                       {" "}
                       <i class="ri-shopping-cart-line"></i> Add to cart{" "}
                     </button>
